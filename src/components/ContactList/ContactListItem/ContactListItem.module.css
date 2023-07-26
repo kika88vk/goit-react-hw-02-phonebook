@@ -1,0 +1,11 @@
+.contact {
+  font-size: 25px;
+  color: var(--primary-text-color);
+  font-weight: 500;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.contact_item {
+  margin-left: 20px;
+}
