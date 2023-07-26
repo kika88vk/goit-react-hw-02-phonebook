@@ -1,7 +1,7 @@
 import { ContactListItem } from './ContactListItem/ContactListItem';
 import PropTypes from 'prop-types';
 
-export const ContactList = ({ contacts }) => {
+export const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <ul>
       {contacts.map(contact => (
@@ -9,6 +9,7 @@ export const ContactList = ({ contacts }) => {
           id={contact.id}
           name={contact.name}
           number={contact.number}
+          deleteContact={onDeleteContact}
         />
       ))}
     </ul>
