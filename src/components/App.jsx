@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ContactForm from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
+import { Filter } from './Filter/Filter';
 import { nanoid } from 'nanoid';
 import css from './App.module.css';
 
@@ -28,17 +29,29 @@ class App extends Component {
     console.log(this.state.contacts);
   };
 
+  handleChangeFilter = evt => {
+    this.setState({ filter: evt.currentTarget.value });
+  };
+
+  getFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
   render() {
+    const visibleContacts = this.getFilteredContacts();
     return (
       <div className={css.container}>
         <h1 className={css.heading}>Phonebook</h1>
-        <div>
-          <ContactForm submit={this.formAddContact} />
-        </div>
-        <div>
-          <h2 className={css.heading}>Contacts</h2>
-          <ContactList contacts={this.state.contacts} />
-        </div>
+
+        <ContactForm submit={this.formAddContact} />
+
+        <h2 className={css.heading}>Contacts</h2>
+        <Filter value={this.state.filter} onChange={this.handleChangeFilter} />
+        <ContactList contacts={visibleContacts} />
       </div>
     );
   }
