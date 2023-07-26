@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ContactForm from './ContactForm/ContactForm';
+import { ContactList } from './ContactList/ContactList';
 import { nanoid } from 'nanoid';
 
 class App extends Component {
@@ -8,8 +9,17 @@ class App extends Component {
     filter: '',
   };
 
-  formSubmitHandler = data => {
-    console.log(data);
+  formAddContact = data => {
+    const contact = {
+      id: nanoid(10),
+      name: data.name,
+      number: data.number,
+    };
+    console.log(contact);
+    this.setState(prevState => ({
+      contacts: [contact, ...prevState.contacts],
+    }));
+    console.log(this.state.contacts);
   };
 
   render() {
@@ -17,26 +27,11 @@ class App extends Component {
       <div>
         <h1>Phonebook</h1>
         <div>
-          <ContactForm submit={this.formSubmitHandler} />
-          {/* <form action="" onSubmit={this.handleSubmit}>
-            <label htmlFor="">
-              Name
-              <input
-                type="text"
-                name="name"
-                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-                required
-                value={this.state.name}
-                onChange={this.handleNameChange}
-              />
-            </label>
-            <button type="submit">Add contact</button>
-          </form> */}
+          <ContactForm submit={this.formAddContact} />
         </div>
         <div>
           <h2>Contacts</h2>
-          <ul>{this.state.contacts}</ul>
+          <ContactList contacts={this.state.contacts} />
         </div>
       </div>
     );
