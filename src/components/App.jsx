@@ -35,6 +35,15 @@ class App extends Component {
       number: data.number,
     };
 
+    const existingContact = this.state.contacts.find(
+      contact => contact.name.toLowerCase() === data.name.toLowerCase()
+    );
+
+    if (existingContact) {
+      alert(`Contact with this name is already exists.`);
+      return;
+    }
+
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
     }));
