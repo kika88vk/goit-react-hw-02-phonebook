@@ -6,10 +6,11 @@ export const ContactList = ({ contacts, onDeleteContact }) => {
     <ul>
       {contacts.map(contact => (
         <ContactListItem
-          id={contact.id}
+          key={contact.id}
           name={contact.name}
           number={contact.number}
           deleteContact={onDeleteContact}
+          id={contact.id}
         />
       ))}
     </ul>

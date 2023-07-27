@@ -4,9 +4,9 @@ import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
 class ContactForm extends Component {
+  submit = this.props.submit;
   static propTypes = {
-    name: PropTypes.string,
-    number: PropTypes.string,
+    submit: PropTypes.func.isRequired,
   };
 
   state = {
